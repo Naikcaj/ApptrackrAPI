@@ -9,7 +9,7 @@
 namespace apptrackr\request;
 
 use apptrackr\credentials\ApptrackrCredentials;
-use apptrackr\exceptions\ResponseInvalidException;
+use apptrackr\exceptions\VerificationFailedException;
 
 abstract class ApptrackrRequest {
 	
@@ -96,7 +96,7 @@ EOF;
 		
 		if (!openssl_verify($this->jsonDataBlock, base64_decode($this->signature), $apptrackrPublicKey)) {
 			$legitimate = false;
-			throw new ResponseInvalidException;
+			throw new VerificationFailedException;
 		}
 		else {
 			$legitimate = true;

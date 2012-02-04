@@ -6,7 +6,7 @@ require_once(__DIR__ . "/apptrackr.inc.php");
 
 use apptrackr\credentials\ApptrackrCredentials;
 use apptrackr\request\AppScrapeRequest;
-use appptrackr\exceptions\ResponseInvalidException; 
+use appptrackr\exceptions\VerificationFailedException; 
 
 $storeURL = "http://itunes.apple.com/ie/app/flashlight./id285281827?mt=8";
 
@@ -27,7 +27,7 @@ $r->apptrackrCredentials = $ac;
 try {
 	$r->sendRequest();
 }
-catch (ResponseInvalidException $e) {
+catch (VerificationFailedException $e) {
 	echo "Signature verification failed, possible man in the middle attack!";
 	die();
 }

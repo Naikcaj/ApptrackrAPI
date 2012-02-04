@@ -1,6 +1,6 @@
 <?php
 /**
- * Response invalid exception
+ * Verification failed exception
  * Responses are verified by checking the signature and public key against
  * the response data. If the verification fails, this exception is thrown
  *
@@ -9,6 +9,6 @@
  */
 namespace apptrackr\exceptions;
 
-class ResponseInvalidException extends \Exception {
+class VerificationFailedException extends \Exception {
 }
 ?>
