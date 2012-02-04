@@ -80,6 +80,9 @@ abstract class ApptrackrRequest {
 	
 	protected function verifyResponse() {
 		
+		if (!$this->jsonDataBlock)
+			return;
+		
 		$key = <<<'EOF'
 -----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCxyZS+9iSODM7uiv4g1CNV36xg
