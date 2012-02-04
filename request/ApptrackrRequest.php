@@ -10,6 +10,8 @@ namespace apptrackr\request;
 
 use apptrackr\credentials\ApptrackrCredentials;
 use apptrackr\exceptions\VerificationFailedException;
+use apptrackr\api\APIStatusCodes;
+use apptrackr\exceptions\FiveZeroException;
 
 abstract class ApptrackrRequest {
 	
@@ -18,6 +20,7 @@ abstract class ApptrackrRequest {
 	public $apptrackrCredentials;
 	
 	public $responseCode;
+	public $responseString;
 	public $signature;
 	public $jsonDataBlock;
 	public $dataBlock;
@@ -70,12 +73,14 @@ abstract class ApptrackrRequest {
 		$working = json_decode($data);
 			
 		$this->responseCode = $working->code;
+		$this->responseString = APIStatusCodes::codeToString($this->responseCode);
 		$this->jsonDataBlock = $working->data;
 		$this->signature = $working->signature;	
 		$this->dataBlock = json_decode($this->jsonDataBlock);
 		
 		$this->verifyResponse();
 		$this->parseResponse();
+		$this->processResponseCode();
 	}
 	
 	protected function verifyResponse() {
@@ -104,5 +109,13 @@ EOF;
 	}
 	
 	abstract protected function parseResponse();
+	
+	protected function processResponseCode() {
+		$codeAsString = (string)$this->responseCode;
+		$splitCode = str_split($codeAsString);
+		
+		if ($splitCode[0] == "5")
+			throw new FiveZeroException($this->responseCode, $this->responseString);
+	}
 }
 ?>
