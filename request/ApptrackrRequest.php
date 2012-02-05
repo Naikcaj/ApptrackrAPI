@@ -40,6 +40,11 @@ abstract class ApptrackrRequest {
 		else if (($this->apptrackrCredentials->username) && ($this->apptrackrCredentials->password)) {
 			$this->apptrackrCredentials->makePasswordHash();
 			$this->apptrackrCredentials->getUserID();
+			
+			$this->request["auth"] = array(
+				'id' => $this->apptrackrCredentials->userID,
+				'passhash' => $this->apptrackrCredentials->passhash
+			);
 		}
 	}
 	

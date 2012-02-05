@@ -7,6 +7,8 @@
  */
 namespace apptrackr\credentials;
 
+use apptrackr\request\UserCheckAuthRequest;
+
 class ApptrackrCredentials {
 	
 	public $username;
@@ -27,10 +29,10 @@ class ApptrackrCredentials {
 	}
 	
 	public function getUserID() {
-		if ((!$username) || (!$password))
+		if ((!$this->username) || (!$this->password))
 			return;
 		
-		$this->makePasswordhash();
+		$this->makePasswordHash();
 		
 		$r = new UserCheckAuthRequest;
 		$r->apptrackrCredentials = $this;
@@ -40,7 +42,7 @@ class ApptrackrCredentials {
 	}
 	
 	public function makePasswordHash() {
-		$this->passhash = md5($password);
+		$this->passhash = md5($this->password);
 	}
 }
 		
