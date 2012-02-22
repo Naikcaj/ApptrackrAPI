@@ -33,6 +33,7 @@ class AppScrapeRequest extends ApptrackrRequest {
 	public $whatsNew;
 	public $requirements;
 	public $languages;
+	public $icons = array();
 	
 	protected function constructObject() {
 		$this->request["object"] = "App";
@@ -64,6 +65,11 @@ class AppScrapeRequest extends ApptrackrRequest {
 		$this->whatsNew = $this->dataBlock->whatsnew;
 		$this->requirements = $this->dataBlock->requirements;
 		$this->languages = $this->dataBlock->languages;
+		$this->icons[100] = $this->dataBlock->icon-100;
+		$this->icons[75] = $this->dataBlock->icon-75;
+		$this->icons[57] = $this->dataBlock->icon-57;
+		$this->icons[175] = $this->dataBlock->icon-175;
+		
 	}
 }
 ?>
