@@ -52,6 +52,7 @@ class AppScrapeRequest extends ApptrackrRequest {
 	protected function parseResponse() {
 		$this->name = $this->dataBlock->name;
 		$this->scrapeDate = $this->dataBlock->scrapedate;
+		$this->iTunesURL = $this->dataBlock->itunesurl;
 		$this->appID = $this->dataBlock->appid;
 		$this->versions = explode(",", $this->dataBlock->allversions);
 		$this->seller = $this->dataBlock->seller;
@@ -65,10 +66,11 @@ class AppScrapeRequest extends ApptrackrRequest {
 		$this->whatsNew = $this->dataBlock->whatsnew;
 		$this->requirements = $this->dataBlock->requirements;
 		$this->languages = $this->dataBlock->languages;
-		$this->icons[100] = $this->dataBlock->icon-100;
-		$this->icons[75] = $this->dataBlock->icon-75;
-		$this->icons[57] = $this->dataBlock->icon-57;
-		$this->icons[175] = $this->dataBlock->icon-175;
+		
+		$this->icon100 = $this->dataBlockArray["icon-100"];
+		$this->icon75 = $this->dataBlockArray["icon-75"];
+		$this->icon57 = $this->dataBlockArray["icon-57"];
+		$this->icon175 = $this->dataBlockArray["icon-175"];
 		
 	}
 }

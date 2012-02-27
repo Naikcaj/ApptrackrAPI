@@ -24,6 +24,7 @@ abstract class ApptrackrRequest {
 	public $signature;
 	public $jsonDataBlock;
 	public $dataBlock;
+	public $dataBlockArray;
 	
 	public $legitimate;
 	
@@ -82,6 +83,7 @@ abstract class ApptrackrRequest {
 		$this->jsonDataBlock = $working->data;
 		$this->signature = $working->signature;	
 		$this->dataBlock = json_decode($this->jsonDataBlock);
+		$this->dataBlockArray = json_decode($this->jsonDataBlock, true);
 		
 		$this->verifyResponse();
 		$this->parseResponse();
